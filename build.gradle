@@ -1,49 +1,32 @@
-buildscript {
-    ext {
-        springBootVersion = '2.0.6.RELEASE'
-        swaggerVersion = '2.9.2'
-    }
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-    }
+plugins {
+    id 'java'
+    id 'eclipse'
+    id 'idea'
+    id 'org.springframework.boot' version '2.5.4'
 }
-
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
 
 group = 'com.sds.teams'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.8
+
+sourceCompatibility = 11
+targetCompatibility = 11
 
 repositories {
     mavenCentral()
 }
 
-
 dependencies {
-    implementation('org.springframework.boot:spring-boot-starter-data-jpa')
-    implementation('org.springframework.boot:spring-boot-starter-data-rest')
-    implementation('org.springframework.boot:spring-boot-starter-jdbc')
-    implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation platform('org.springframework.boot:spring-boot-dependencies:2.5.4')
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
 
+    implementation group: 'com.google.guava', name: 'guava', version: '27.0-jre'
+    implementation 'javax.xml.bind:jaxb-api'
+    implementation 'com.h2database:h2'
 
-    //Swagger
-    compile 'io.springfox:springfox-swagger-ui:' + swaggerVersion
-    compile 'io.springfox:springfox-swagger2:' + swaggerVersion
-
-
-    compile group: 'com.google.guava', name: 'guava', version: '27.0-jre'
-    compile 'org.mariadb.jdbc:mariadb-java-client:2.1.0'
-    compile('javax.xml.bind:jaxb-api:2.3.0')
-    testCompile 'com.h2database:h2:1.4.194'
-
-    runtimeOnly('org.springframework.boot:spring-boot-devtools')
-    runtimeOnly('org.hsqldb:hsqldb')
-    compileOnly('org.projectlombok:lombok')
-    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    runtimeOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'org.hsqldb:hsqldb'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
